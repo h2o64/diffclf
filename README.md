@@ -4,7 +4,7 @@
 
 Reference implementation of **A Diffusive Classification Loss for Learning Energy-based Generative Models**, accepted at *ICML 2026*.
 
-> RuiKang OuYang, Louis Grenioux, José Miguel Hernández-Lobato. *A Diffusive Classification Loss for Learning Energy-based Generative Models.* ICML 2026. [[arXiv]](https://arxiv.org/abs/2601.21025)
+> RuiKang OuYang*, Louis Grenioux*, José Miguel Hernández-Lobato. *A Diffusive Classification Loss for Learning Energy-based Generative Models.* ICML 2026. [[arXiv]](https://arxiv.org/abs/2601.21025)
 
 ## Overview
 
@@ -22,7 +22,7 @@ Each panel shows the EBM `p_t^θ` at three successive noise levels: as the class
       author={RuiKang OuYang and Louis Grenioux and José Miguel Hernández-Lobato},
       booktitle={Forty-third International Conference on Machine Learning},
       year={2026},
-      url={https://openreview.net/forum?id=RVPqygyGRu},
+      url={https://arxiv.org/abs/2601.21025},
 }
 ```
 
