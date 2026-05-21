@@ -104,12 +104,12 @@ mkdir -p results/clf_gmm
 python experiments/energy_clf_from_sm.py \
     --results_path results/clf_gmm \
     --cpkt_filepath results/sm_gmm/energy_clf_sm_only_target_type_gmm40_dim_128_seed_0.pkl \
-    --loss_type bi_level \
+    --loss_type multi_level \
     --k 4 \
     --seed 0
 ```
 
-`--loss_type` selects the EBM training objective. The diffusive **classification losses** proposed by the paper are `bi_level`, `bi_level_bregman`, `multi_level`, `multi_level_bregman`; the **energy-regularizer baselines** are `cond_nce`, `rne`, `tsm`, `sm`. `--k` controls the level-gap used by the bi-/multi-level classifier objective.
+`--loss_type` selects the EBM training objective. The diffusive **classification losses** proposed by the paper are `bi_level`, `bi_level_bregman`, `multi_level`, `multi_level_bregman`; the **energy-regularizer baselines** are `cond_nce`, `rne`, `tsm`, `sm`. `--k` controls the number of subsampled levels used by the multi-level classifier objective.
 
 ### Stochastic-interpolant variant (still GMM)
 
@@ -125,7 +125,7 @@ mkdir -p results/si_clf_gmm
 python experiments/energy_clf_si_from_sm.py \
     --results_path results/si_clf_gmm \
     --ckpt_filepath results/si_sm_gmm/energy_clf_si_sm_only_dim_128_dsm_weighting_type_square_seed_0.pkl \
-    --loss_type bi_level \
+    --loss_type multi_level \
     --k 4 \
     --seed 0
 
@@ -138,7 +138,7 @@ python experiments/recalibration_si_gmm.py \
 
 ### Alanine-dipeptide (ALDP)
 
-The ALDP scripts expect two extra files (produced via ScoreMD): a training trajectory `train.h5` and a vacuum-conformation tensor `aldp_vacuum.pt`. Once they are in place:
+The ALDP scripts expect two extra files (see above): a training trajectory `train.h5` and a vacuum-conformation tensor `aldp_vacuum.pt`. Once they are in place:
 
 ```bash
 # 1. Score / velocity pretraining
@@ -163,8 +163,8 @@ python experiments/energy_clf_si_from_sm_aldp.py \
     --vacuum_datapath data/aldp_vacuum.pt \
     --ckpt_filepath results/aldp_si_sm/<score-checkpoint>.pkl \
     --vel_ckpt_filepath results/aldp_si_vel/<velocity-checkpoint>.pkl \
-    --loss_type bi_level \
-    --k 2 \
+    --loss_type multi_level \
+    --k 4 \
     --seed 0
 
 # 3a. Recalibrate / sample / replica-exchange
@@ -181,7 +181,7 @@ python experiments/sample_si_aldp.py \
     --vacuum_datapath data/aldp_vacuum.pt \
     --velocity_ckpt_filepath results/aldp_si_vel/<velocity-checkpoint>.pkl \
     --score_ckpt_filepath  results/aldp_si_sm/<score-checkpoint>.pkl \
-    --use_sde_sampling --diff_val 1.0 \
+    --use_sde_sampling --diff_val 0.01 \
     --seed 0
 
 # 3b. Free energy via thermodynamic integration
